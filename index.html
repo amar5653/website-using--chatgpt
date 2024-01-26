@@ -5,72 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Startup Name</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+        /* Styles remain the same as before */
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+            max-height: 400px;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-        }
-
-        nav {
+        .slides {
             display: flex;
-            justify-content: space-around;
-            background-color: #007BFF;
-            padding: 1em;
+            transition: transform 0.5s ease-in-out;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
+        .slide {
+            min-width: 100%;
         }
 
-        .hero-section {
-            text-align: center;
-            padding: 4em 1em;
-            background-color: #007BFF;
-            color: #fff;
-        }
-
-        .features-section {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 2em;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        p {
-            line-height: 1.6;
-            color: #666;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* Additional styling for better appearance */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
     </style>
 </head>
@@ -86,23 +42,37 @@
         <a href="#contact">Contact</a>
     </nav>
 
+    <div class="slider">
+        <div class="slides">
+            <div class="slide fade-in">
+                <img src="image1.jpg" alt="Slide 1">
+            </div>
+            <div class="slide fade-in">
+                <img src="image2.jpg" alt="Slide 2">
+            </div>
+            <div class="slide fade-in">
+                <img src="image3.jpg" alt="Slide 3">
+            </div>
+        </div>
+    </div>
+
     <div class="hero-section">
-        <h2>Welcome to Your Startup</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
-        <a href="#cta" class="cta-button">Learn More</a>
+        <h2 class="fade-in">Welcome to Your Startup</h2>
+        <p class="fade-in">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
+        <a href="#cta" class="cta-button fade-in">Learn More</a>
     </div>
 
     <div id="features" class="features-section">
-        <h2>Our Features</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
+        <h2 class="fade-in">Our Features</h2>
+        <p class="fade-in">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
+        <p class="fade-in">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus.</p>
     </div>
 
     <section id="cta">
-        <h2>Contact Us</h2>
-        <p>Ready to take your business to the next level? Contact us now!</p>
+        <h2 class="fade-in">Contact Us</h2>
+        <p class="fade-in">Ready to take your business to the next level? Contact us now!</p>
 
-        <form action="mailto:info@example.com" method="post" enctype="text/plain">
+        <form action="mailto:info@example.com" method="post" enctype="text/plain" class="fade-in">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <br>
@@ -110,5 +80,40 @@
         </form>
     </section>
 
+    <script>
+        // JavaScript for image slider
+        const slides = document.querySelector('.slides');
+        const slideList = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function showSlide() {
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        function nextSlide() {
+            index = (index + 1) % slideList.length;
+            showSlide();
+        }
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+        // JavaScript for fade-in effect
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function fadeIn() {
+            fadeElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', fadeIn);
+        window.addEventListener('load', fadeIn);
+    </script>
 </body>
 </html>
