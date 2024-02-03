@@ -82,6 +82,64 @@
     </section>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    // Toggle skill details
+    var skills = document.querySelectorAll('.skill');
+
+    skills.forEach(function (skill) {
+        skill.addEventListener('click', function () {
+            // Toggle the 'active' class to show/hide skill details
+            this.classList.toggle('active');
+        });
+    });
+
+    // Add a sample function for fetching data from an API
+    function fetchData() {
+        // Simulate fetching data from an API
+        console.log('Fetching data...');
+        setTimeout(function () {
+            console.log('Data fetched!');
+            // You can update the DOM with the fetched data here
+        }, 2000); // Simulating a 2-second delay for demonstration purposes
+    }
+
+    // Call the fetchData function when the "Fetch Data" button is clicked
+    var fetchDataButton = document.getElementById('fetchDataBtn');
+    if (fetchDataButton) {
+        fetchDataButton.addEventListener('click', function () {
+            fetchData();
+        });
+    }
+});
+
+        document.addEventListener('DOMContentLoaded', function () {
+    // Get the button
+    var mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    mybutton.addEventListener('click', function () {
+        topFunction();
+    });
+
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+});
+
         // JavaScript for image slider
         const slides = document.querySelector('.slides');
         const slideList = document.querySelectorAll('.slide');
